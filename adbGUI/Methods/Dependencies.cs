@@ -15,7 +15,7 @@ namespace adbGUI.Methods
 	{
 		private static readonly string downloadedZipFile = Path.GetTempPath() + "platform-tools-latest-windows.zip";
 
-		private static readonly string tmpPlatformPath = Path.Combine(Path.GetTempPath(), "platform-tools");
+		private static readonly string platformToolsPath = Path.Combine(Environment.CurrentDirectory, "adb_gui_platform-tools");
 
 		private static readonly Uri downloadUri = new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip");
 
@@ -53,7 +53,7 @@ namespace adbGUI.Methods
 		{
 			foreach (var file in StrFiles)
 			{
-				if (!File.Exists(Path.Combine(tmpPlatformPath, file)))
+				if (!File.Exists(Path.Combine(platformToolsPath, file)))
 				{
 					return false;
 				}
@@ -72,9 +72,9 @@ namespace adbGUI.Methods
 
 		private static void ExtractFiles()
 		{
-			if (!Directory.Exists(tmpPlatformPath))
+			if (!Directory.Exists(platformToolsPath))
 			{
-				Directory.CreateDirectory(tmpPlatformPath);
+				Directory.CreateDirectory(platformToolsPath);
 			}
 
 			using (ZipArchive archive = ZipFile.OpenRead(downloadedZipFile))
@@ -85,7 +85,7 @@ namespace adbGUI.Methods
 					{
 						try
 						{
-							entry.ExtractToFile(Path.Combine(Path.GetTempPath(), entry.FullName), true);
+							entry.ExtractToFile(Path.Combine(platformToolsPath, entry.Name), true);
 						}
 						catch (IOException)
 						{
@@ -100,7 +100,7 @@ namespace adbGUI.Methods
 		{
 			string oldValue = Environment.GetEnvironmentVariable("PATH");
 
-			Environment.SetEnvironmentVariable("PATH", oldValue + ";" + tmpPlatformPath);
+			Environment.SetEnvironmentVariable("PATH", oldValue + ";" + platformToolsPath);
 		}
 	}
 }
