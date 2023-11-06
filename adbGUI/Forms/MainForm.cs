@@ -53,7 +53,7 @@ namespace adbGUI.Forms
 			}
 		}
 
-		private void Btn_ConsoleClear_Click(object sender, EventArgs e)
+        private void Btn_ConsoleClear_Click(object sender, EventArgs e)
 		{
 			rtb_console.Clear();
 		}

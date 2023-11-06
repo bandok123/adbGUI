@@ -11,6 +11,7 @@ namespace adbGUI.Methods
 	static class DevicesWatcher
 	{
 		public static event EventHandler<List<string>> DevicesChanged;
+		public static List<string> Devices;
 
 		private static string oldOutput = "";
 
@@ -31,7 +32,8 @@ namespace adbGUI.Methods
 
 				if (output != oldOutput)
 				{
-					List<string> list = new List<string>();
+					Devices = Devices ?? new List<string>();
+					Devices.Clear();
 
 					oldOutput = output;
 
@@ -42,12 +44,12 @@ namespace adbGUI.Methods
 							continue;
 						}
 
-						list.Add(str.Substring(0, str.IndexOf("\t")));
+						Devices.Add(str.Substring(0, str.IndexOf("\t")));
 
 						Debug.WriteLine("Device added: " + str.Substring(0, str.IndexOf("\t")));
 					}
 
-					DevicesChanged?.Invoke(null, list);
+					DevicesChanged?.Invoke(null, Devices);
 				}
 				Thread.Sleep(refreshInterval);
 			}

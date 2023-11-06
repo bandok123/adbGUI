@@ -26,8 +26,8 @@ namespace adbGUI.Methods
 				RedirectStandardOutput = true,
 				RedirectStandardError = true,
 				RedirectStandardInput = true,
-				StandardOutputEncoding = Encoding.GetEncoding(defaultCodePage),
-				StandardErrorEncoding = Encoding.GetEncoding(defaultCodePage)
+				StandardOutputEncoding = UTF8Encoding.UTF8,//Encoding.GetEncoding(defaultCodePage),
+				StandardErrorEncoding = UTF8Encoding.UTF8//Encoding.GetEncoding(defaultCodePage)
 			};
 
 			Commandline.EnableRaisingEvents = true;
@@ -131,6 +131,7 @@ namespace adbGUI.Methods
 			Commandline.StandardInput.WriteLine(command);
 		}
 
+
 		public static string GetOutput(string fileName, string arguments)
 		{
 			Process cmd = new Process();
@@ -144,8 +145,8 @@ namespace adbGUI.Methods
 				RedirectStandardOutput = true,
 				RedirectStandardError = true,
 				RedirectStandardInput = true,
-				StandardOutputEncoding = Encoding.GetEncoding(defaultCodePage),
-				StandardErrorEncoding = Encoding.GetEncoding(defaultCodePage)
+				StandardOutputEncoding = UTF8Encoding.UTF8,//Encoding.GetEncoding(defaultCodePage),
+				StandardErrorEncoding = UTF8Encoding.UTF8,//Encoding.GetEncoding(defaultCodePage)
 			};
 
 			cmd.EnableRaisingEvents = true;
